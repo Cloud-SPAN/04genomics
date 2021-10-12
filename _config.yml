@@ -89,4 +89,4 @@ exclude:
 # Turn on built-in syntax highlighting.
 highlighter: rouge
 
-remote_theme: carpentries/carpentries-theme
+remote_theme: Cloud-SPAN/cloud-span-theme
