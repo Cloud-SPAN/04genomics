@@ -10,6 +10,8 @@ As you progress through this lesson, keep in mind that, even if you aren't going
 you will be learning some very important lessons about using command-line bioinformatic tools. What you learn here will enable you to 
 use a variety of bioinformatic tools with confidence and greatly enhance your research efficiency and productivity.
 
+We will also be learning about the power of automation when repeating similar workflows multiple times, and apply this to our analysis.
+
 > ## Prerequisites
 >
 > This lesson assumes a working understanding of the bash shell. If you haven't already completed the [Using the Command Line](https://cloud-span.github.io/genomics03-using-the-command-line/) lesson, and aren't familiar with the bash shell, please review those materials
