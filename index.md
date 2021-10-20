@@ -21,5 +21,5 @@ We will also be learning about the power of automation when repeating similar wo
 > concept of genomic variation within a population. 
 >
 > This lesson uses data hosted on an Amazon Machine Instance (AMI). Course participants will be given information on how
-> to log-in to the AMI during the course. Information on preparing for the course is provided on the [Cloud-SPAN Genomics Course setup page](https://cloud-span.github.io/genomics01-intro/setup.html)..
+> to log-in to the AMI during the course. Information on preparing for the course is provided on the [Cloud-SPAN Genomics Course setup page](setup).
 {: .prereq}
