@@ -1,31 +1,8 @@
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5584512.svg)](https://doi.org/10.5281/zenodo.5584512)
 
-# Wrangling Genomics
+# Genomics  Genomics Session 4. Data processing and analysis
 
-Lesson for quality control and wrangling genomics data. This repository is maintained by [Josh Herr](https://github.com/jrherr), [Ming Tang](https://github.com/crazyhottommy), and [Fotis Psomopoulos](https://github.com/fpsom).
+First session of the Cloud-SPAN Genomics course.
 
-Amazon public AMI for this tutorial is "dataCgen-qc". 
-
-## Background
-
-Wrangling genomics trains novice learners on a variant calling workflow. Participants will learn how to evaluate sequence quality and what to do if it is not good. We will then cover aligning reads to a genome, and calling variants, as well as discussing different file formats. Results will be visualized. Finally, we will cover how to automate the process by building a shell script.
-
-This lesson is part of the [Data Carpentry](http://www.datacarpentry.org/) [Genomics Workshop](http://www.datacarpentry.org/genomics-workshop/).
-
-## Contribution
-
-- Make a suggestion or correct an error by [raising an Issue](https://github.com/datacarpentry/wrangling-genomics/issues).
-
-## Code of Conduct
-
-All participants should agree to abide by the [Data Carpentry Code of Conduct](http://www.datacarpentry.org/code-of-conduct/).
-
-## Authors
-
-Wrangling genomics is authored and maintained by the [community](https://github.com/datacarpentry/wrangling-genomics/network/members).
-
-## Citation
-
-Please cite as:
-
-Erin Alison Becker, Taylor Reiter, Fotis Psomopoulos, Sheldon John McKay, Jessica Elizabeth Mizzi, Jason Williams, … Winni Kretzschmar. (2019, June). datacarpentry/wrangling-genomics: Data Carpentry: Genomics data wrangling and processing, June 2019 (Version v2019.06.1). Zenodo. http://doi.org/10.5281/zenodo.3260609
+Cloud-SPAN is a collaboration between the [Department of Biology, University of York](https://www.york.ac.uk/biology/) and [The Software Sustainability Institute](https://www.software.ac.uk/) funded by the UKRI innovation scholars award (Project Reference: [MR/V038680/1](https://www.google.com/url?q=https%3A%2F%2Fgtr.ukri.org%2Fprojects%3Fref%3DMR%252FV038680%252F1&sa=D&sntz=1&usg=AFQjCNF0nsozFp-1kvcp0Dgjks6kY8CiCQ)) which trains researchers, and the research software engineers that support them, to run specialised analyses on cloud-based high-performance computing infrastructure
+The course is based on the Data Carpentry’s [Genomics Workshop](https://datacarpentry.org/genomics-workshop), streamlined and extended to serve as the foundation course for the Cloud-SPAN advanced modules. The edited material is not endorsed by [Data Carpentry](https://datacarpentry.org/) or the [Carpentries](https://carpentries.org/) in general.
