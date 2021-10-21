@@ -101,7 +101,7 @@ In this example, we've told cutadapt:
 | `-p trimmed.R2.fastq.gz` | the name of the output of the trimmed reverse reads |
 | `reads.R1.fastq.gz` | the input forward reads file |
 | `reads.R2.fastq.gz` | the input reverse reads file |
-| ` > sample_fastq.gz.log` | this writes the output log of cutadapt to a file |
+| `sample_fastq.gz.log` | this writes the output log of cutadapt to a file |
 
 
 > ## Multi-line commands
