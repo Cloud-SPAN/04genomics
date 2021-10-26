@@ -38,9 +38,9 @@ $ cutadapt
 Which will give you the following output:
 
 ~~~
-This is cutadapt 2.10 with Python 3.7.3                   
-Command line parameters:                                  
-Run "cutadapt --help" to see command-line options.        
+This is cutadapt 3.4 with Python 3.9.5
+Command line parameters:
+Run "cutadapt --help" to see command-line options.
 See https://cutadapt.readthedocs.io/ for full documentation.
 
 cutadapt: error: You did not provide any input file names. Please give me something to do!
@@ -57,9 +57,9 @@ $ cutadapt -h
 There are many parameters here so we will just show the top of the output which explains the usage, but you should look through and familiarise yourself with the options available. Importantly it shows you what are the required parameters and also the version of the software you have used which is important to keep note of. You should always record what versions of software you have used and what parameters you ran the software with in order to make your analysis reproducible
 
 ~~~
-cutadapt version 2.10
+cutadapt version 3.4
 
-Copyright (C) 2010-2020 Marcel Martin <marcel.martin@scilifelab.se>
+Copyright (C) 2010-2021 Marcel Martin <marcel.martin@scilifelab.se>
 
 cutadapt removes adapter sequences from high-throughput sequencing reads.
 
@@ -138,7 +138,28 @@ $ cutadapt -q 20 -a CTGTCTCTTATACACATCT \
 {: .bash}
 
 ~~~
-cutadapt output log to be put here:
+This is cutadapt 3.4 with Python 3.9.5
+Command line parameters: -q 20 -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -o SRR2589044_1.trim.fastq.gz -p SRR2589044_2.trim.fastq.gz SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz
+Processing reads on 1 core in paired-end mode ...
+Finished in 24.31 s (22 µs/read; 2.73 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:          1,107,090
+  Read 1 with adapter:                 175,119 (15.8%)
+  Read 2 with adapter:                 165,406 (14.9%)
+Pairs written (passing filters):     1,107,090 (100.0%)
+
+Total basepairs processed:   332,127,000 bp
+  Read 1:   166,063,500 bp
+  Read 2:   166,063,500 bp
+Quality-trimmed:              27,558,810 bp (8.3%)
+  Read 1:     5,686,043 bp
+  Read 2:    21,872,767 bp
+Total written (filtered):    290,141,080 bp (87.4%)
+  Read 1:   152,675,102 bp
+  Read 2:   137,465,978 bp
+
 
 ~~~
 {: .output}
@@ -148,12 +169,12 @@ cutadapt output log to be put here:
 > Use the output from your cutadapt command to answer the
 > following questions.
 >
-> 1) What percent of reads did we discard from our sample?
-> 2) What percent of reads did we keep both pairs?
+> 1) How many reads had adapters in the R1 reads?
+> 2) What total percent of reads were trimmed/filtered?
 >
 >> ## Solution
->> 1) 0.23%
->> 2) 79.96%
+>> 1) 15.8%
+>> 2) 87.4%
 > {: .solution}
 {: .challenge}
 
@@ -203,17 +224,16 @@ gzip SRR2584863_1.fastq
 {: .bash}
 
 ~~~
-$ for infile in *_1.fastq.gz
+$ for infile in SRR2584863 SRR2584866 SRR2589044
 > do
->   base=$(basename ${infile} _1.fastq.gz)
->   cutadapt -q 20 -a CTGTCTCTTATACACATCT \
+> cutadapt -q 20 -a CTGTCTCTTATACACATCT \
 >           -A CTGTCTCTTATACACATCT \
->           -o ${base}_1.trim.fastq.gz -p ${base}_2.trim.fastq.gz \
->            ${base}_1.fastq.gz ${base}_2.fastq.gz \
->            > v${base}_fastq.gz.log &
+>           -o $infile\_1.trim.fastq.gz -p $infile\_2.trim.fastq.gz \
+>            $infile\_1.fastq.gz $infile\_2.fastq.gz \
+>            > $infile\_fastq.gz.log
 > done
-
 ~~~
+
 {: .bash}
 
 

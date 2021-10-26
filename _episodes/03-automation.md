@@ -50,17 +50,18 @@ $ for filename in *.zip
 
 And here's the one you wrote for running cutadapt on all of our `.fastq` sample files:
 
+
 ~~~
-$ for infile in *_1.fastq.gz
+$ for infile in SRR2584863 SRR2584866 SRR2589044
 > do
->   base=$(basename ${infile} _1.fastq.gz)
->   cutadapt -q 20 -a CTGTCTCTTATACACATCT \
+> cutadapt -q 20 -a CTGTCTCTTATACACATCT \
 >           -A CTGTCTCTTATACACATCT \
->           -o ${base}_1.trim.fastq.gz -p ${base}_2.trim.fastq.gz \
->            ${base}_1.fastq.gz ${base}_2.fastq.gz \
->            > v${base}_fastq.gz.log &
+>           -o $infile\_1.trim.fastq.gz -p $infile\_2.trim.fastq.gz \
+>            $infile\_1.fastq.gz $infile\_2.fastq.gz \
+>            >> $infile\_fastq.gz.log
 > done
 ~~~
+
 {: .bash}
 
 Notice that in this `for` loop, we used two variables, `infile`, which was defined in the `for` statement, and `base`, which was created from the filename during each iteration of the loop.
@@ -175,7 +176,6 @@ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 Your full shell script should now look like this:
 
 ~~~
-set -e
 cd ~/dc_workshop/data/untrimmed_fastq/
 
 echo "Running FastQC ..."
@@ -262,40 +262,23 @@ $ less run_variant_calling.sh
 The script should look like this:
 
 ~~~
-set -e
 cd ~/dc_workshop/results
 
-genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+bwa index ecoli_rel606.fasta
 
-bwa index $genome
+for file in SRR2584863 SRR2584866 SRR2589044
+do
+	echo "working with file $file"
+	bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $file.aligned.sam
+	samtools view -S -b $file.sam > $file.aligned.bam
+	samtools sort -o $file.aligned.sorted.bam $file.aligned.bam
+	samtools index $file.aligned.sorted.bam
+	bcftools mpileup -O b -o $file\_raw.bcf -f ecoli_rel606.fasta $file.aligned.sorted.bam
+	bcftools call --ploidy 1 -m -v -o $file\_variants.vcf $file\_raw.bcf
+	vcfutils.pl varFilter $file\_variants.vcf > $file\_final_variants.vcf
 
-mkdir -p sam bam bcf vcf
+done
 
-for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
-    do
-    echo "working with file $fq1"
-
-    base=$(basename $fq1 _1.trim.sub.fastq)
-    echo "base name is $base"
-
-    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
-    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
-    sam=~/dc_workshop/results/sam/${base}.aligned.sam
-    bam=~/dc_workshop/results/bam/${base}.aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
-    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
-    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf
-
-    bwa mem $genome $fq1 $fq2 > $sam
-    samtools view -S -b $sam > $bam
-    samtools sort -o $sorted_bam $bam
-    samtools index $sorted_bam
-    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
-    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
-    vcfutils.pl varFilter $variants > $final_variants
-
-    done
 ~~~
 {: .output}
 
@@ -309,25 +292,10 @@ cd ~/dc_workshop/results
 ~~~
 {: .output}
 
-Next we tell our script where to find the reference genome by assigning the `genome` variable to
-the path to our reference genome:
-
-~~~
-genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
-~~~
-{: .output}
-
 Next we index our reference genome for BWA:
 
 ~~~
-bwa index $genome
-~~~
-{: .output}
-
-And create the directory structure to store our results in:
-
-~~~
-mkdir -p sam bam bcf vcf
+bwa index ecoli_rel606.fasta
 ~~~
 {: .output}
 
@@ -336,91 +304,73 @@ within the loop will be executed once for each of the FASTQ files in the
 `data/trimmed_fastq_small/` directory.
 We will include a few `echo` statements to give us status updates on our progress.
 
-The first thing we do is assign the name of the FASTQ file we're currently working with to a variable called `fq1` and
+The first thing we do is assign the name of the FASTQ file we're currently working with to a variable called `$file` and
 tell the script to `echo` the filename back to us so we can check which file we're on.
+In this variable $file we are just giving a list of the sample name without the suffix
 
 ~~~
-for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
-    do
-    echo "working with file $fq1"
-~~~
-{: .bash}
-
-We then extract the base name of the file (excluding the path and `.fastq` extension) and assign it
-to a new variable called `base`.
-~~~
-    base=$(basename $fq1 _1.trim.sub.fastq)
-    echo "base name is $base"
+for file in SRR2584863 SRR2584866 SRR2589044
+do
+	echo "working with file $file"
 ~~~
 {: .bash}
 
-We can use the `base` variable to access both the `base_1.fastq` and `base_2.fastq` input files, and create variables to store the names of our output files. This makes the script easier to read because we don't need to type out the full name of each of the files: instead, we use the `base` variable, but add a different extension (e.g. `.sam`, `.bam`) for each file produced by our workflow.
-
+We are using the base of this name and in order to access both the _1 and _2 input files we use
+$file and the rest of the file name _2.trim.sub.fastq for the _2 input file. The first time through this loop the computer will interpret '$file\_2.trim.sub.fastq' as SRR2584863_2.trim.sub.fastq. The '\' is a special character which allows us to add the variable name $file to the string to _2.trim.sub.fastq
 
 ~~~
-    #input fastq files
-    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
-    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
-
-    # output files
-    sam=~/dc_workshop/results/sam/${base}.aligned.sam
-    bam=~/dc_workshop/results/bam/${base}.aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
-    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
-    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
+bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $file.aligned.sam
 ~~~
 {: .bash}
-
 
 And finally, the actual workflow steps:
 
 1) align the reads to the reference genome and output a `.sam` file:
 
 ~~~
-    bwa mem $genome $fq1 $fq2 > $sam
+bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $file.aligned.sam
 ~~~
 {: .output}
 
 2) convert the SAM file to BAM format:
 
 ~~~
-    samtools view -S -b $sam > $bam
+    samtools view -S -b $file.sam > $file.aligned.bam
 ~~~
 {: .output}
 
 3) sort the BAM file:
 
 ~~~
-    samtools sort -o $sorted_bam $bam
+    samtools sort -o $file.aligned.sorted.bam $file.aligned.bam
 ~~~
 {: .output}
 
 4) index the BAM file for display purposes:
 
 ~~~
-    samtools index $sorted_bam
+    samtools index $file.aligned.sorted.bam
 ~~~
 {: .output}
 
 5) calculate the read coverage of positions in the genome:
 
 ~~~
-    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
+    bcftools mpileup -O b -o $file\_raw.bcf -f ecoli_rel606.fasta $file.aligned.sorted.bam
 ~~~
 {: .output}
 
 6) call SNPs with bcftools:
 
 ~~~
-    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf
+    bcftools call --ploidy 1 -m -v -o $file\_variants.vcf $file\_raw.bcf
 ~~~
 {: .output}
 
 7) filter and report the SNP variants in variant calling format (VCF):
 
 ~~~
-    vcfutils.pl varFilter $variants  > $final_variants
+    vcfutils.pl varFilter $file\_variants.vcf > $file\_final_variants.vcf
 ~~~
 {: .output}
 
