@@ -1,15 +1,17 @@
 ---
 layout: page
-title: "Optional: Alignment in IGV"
+title: "Alignment in IGV"
 ---
-# Optional Extra Lesson using IGV
+This extra lesson is optional and requires you to download software to your own PC or laptop.
+
+## Optional Extra: Alignment in IGV
 
 > ## Installing IGV
 > For this lesson you will need to download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
 > to unzip it, and then drag the program into your Applications folder. 
 {: .callout}
 
-### Viewing with IGV
+## Viewing with IGV
 
 [IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
