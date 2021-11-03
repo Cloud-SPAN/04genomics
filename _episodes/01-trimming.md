@@ -117,7 +117,7 @@ In this example, we've told cutadapt:
 Now we will run cutadapt on our data. To begin, navigate to your `untrimmed_fastq` data directory:
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq
+$ cd ~/cs_course/data/untrimmed_fastq
 ~~~
 {: .bash}
 
@@ -125,7 +125,7 @@ We are going to run cutadapt on one of our paired-end samples.
 While using FastQC we saw that Nextera adapters were present in our samples.
 The adaptor sequences for both reads according to the illumina website is CTGTCTCTTATACACATCT
 
-We will  remove bases if their phred score is below 20 (like in our example above). The ampersand (&) tells linux to run the process in the background and the greater than symbol (>) pipes the output of the command to a file
+We will  remove bases if their phred score is below 20 (like in our example above). The ampersand (&) tells linux to run the process in the background and the greater than symbol (>) pipes the output of the command to a file.
 
 ~~~
 $ cutadapt -q 20 -a CTGTCTCTTATACACATCT \
@@ -138,10 +138,26 @@ $ cutadapt -q 20 -a CTGTCTCTTATACACATCT \
 {: .bash}
 
 ~~~
-This is cutadapt 3.4 with Python 3.9.5
-Command line parameters: -q 20 -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -o SRR2589044_1.trim.fastq.gz -p SRR2589044_2.trim.fastq.gz SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz
+[1] 12490
+Done           00:01:11     1,107,090 reads @  64.4 µs/read;   0.93 M reads/minute
+~~~
+{: .output}
+
+The program will take around one minute to run. You will need to press enter to exit once it has finished.
+
+We told the computer to run the process in the background (using **&**) so to see our results we need to open the log file we have produced.
+
+~~~
+less SRR2589044_fastq.gz.log
+~~~
+{: .bash}
+
+~~~
+This is cutadapt 3.5 with Python 3.9.5
+Command line parameters: -q 20 -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -o SRR2589044_1.t
+rim.fastq.gz -p SRR2589044_2.trim.fastq.gz SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz
 Processing reads on 1 core in paired-end mode ...
-Finished in 24.31 s (22 µs/read; 2.73 M reads/minute).
+Finished in 71.38 s (64 µs/read; 0.93 M reads/minute).
 
 === Summary ===
 
@@ -159,8 +175,6 @@ Quality-trimmed:              27,558,810 bp (8.3%)
 Total written (filtered):    290,141,080 bp (87.4%)
   Read 1:   152,675,102 bp
   Read 2:   137,465,978 bp
-
-
 ~~~
 {: .output}
 
@@ -187,8 +201,8 @@ $ ls SRR2589044*
 {: .bash}
 
 ~~~
-SRR2589044_1.fastq.gz       SRR2589044_2.trim.fastq.gz
-SRR2589044_1.trim.fastq.gz  SRR2589044_2.fastq.gz
+SRR2589044_1.fastq.gz       SRR2589044_2.fastq.gz       SRR2589044_fastq.gz.log
+SRR2589044_1.trim.fastq.gz  SRR2589044_2.trim.fastq.gz
 ~~~
 {: .output}
 
@@ -201,11 +215,11 @@ $ ls SRR2589044* -l -h
 {: .bash}
 
 ~~~
-Need to rerun with cutadapt to update
--rw-rw-r-- 1 dcuser dcuser 124M Jul  6 20:22 SRR2589044_1.fastq.gz
--rw-rw-r-- 1 dcuser dcuser  94M Jul  6 22:33 SRR2589044_1.trim.fastq.gz
--rw-rw-r-- 1 dcuser dcuser 128M Jul  6 20:24 SRR2589044_2.fastq.gz
--rw-rw-r-- 1 dcuser dcuser  91M Jul  6 22:33 SRR2589044_2.trim.fastq.gz
+-rw-rw-r-- 1 csuser csuser 124M Nov  3 11:05 SRR2589044_1.fastq.gz
+-rw-rw-r-- 1 csuser csuser 122M Nov  3 13:22 SRR2589044_1.trim.fastq.gz
+-rw-rw-r-- 1 csuser csuser 128M Nov  3 11:05 SRR2589044_2.fastq.gz
+-rw-rw-r-- 1 csuser csuser 120M Nov  3 13:22 SRR2589044_2.trim.fastq.gz
+-rw-rw-r-- 1 csuser csuser 5.8K Nov  3 13:22 SRR2589044_fastq.gz.log
 ~~~
 {: .output}
 
@@ -263,7 +277,7 @@ control process! Before we move on, let's move our trimmed FASTQ files
 to a new subdirectory within our `data/` directory.
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq
+$ cd ~/cs_course/data/untrimmed_fastq
 $ mkdir ../trimmed_fastq
 $ mv *.trim* ../trimmed_fastq
 $ cd ../trimmed_fastq
@@ -290,7 +304,7 @@ SRR2584863_2.trim.fastq.gz    SRR2584866_2.trim.fastq.gz    SRR2589044_2.trim.fa
 >> In your AWS terminal window do:
 >>
 >> ~~~
->> $ fastqc ~/dc_workshop/data/trimmed_fastq/*.fastq*
+>> $ fastqc ~/cs_course/data/trimmed_fastq/*.fastq*
 >> ~~~
 >> {: .bash}
 >>
@@ -298,7 +312,7 @@ SRR2584863_2.trim.fastq.gz    SRR2584866_2.trim.fastq.gz    SRR2589044_2.trim.fa
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
+>> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
 >> ~~~
 >> {: .bash}
 >>
