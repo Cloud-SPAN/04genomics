@@ -36,7 +36,7 @@ The alignment process consists of two steps:
 First we download the reference genome for *E. coli* REL606. Although we could copy or move the file with `cp` or `mv`, most genomics workflows begin with a download step, so we will practice that here.
 
 ~~~
-$ cd ~/dc_workshop
+$ cd ~/cs_course
 $ curl -L -o data/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
 $ gunzip data/ecoli_rel606.fasta.gz
 ~~~
@@ -65,7 +65,7 @@ and will enable us to run our variant calling workflow quite quickly.
 ~~~
 $ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 $ tar xvf sub.tar.gz
-$ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
+$ mv sub/ ~/cs_course/data/trimmed_fastq_small
 ~~~
 {: .bash}
 
@@ -173,7 +173,7 @@ $ samtools view -S -b SRR2584866.aligned.sam > SRR2584866.aligned.bam
 Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
 
 ~~~
-$ samtools sort -o /SRR2584866.aligned.sorted.bam SRR2584866.aligned.bam
+$ samtools sort -o SRR2584866.aligned.sorted.bam SRR2584866.aligned.bam
 ~~~
 {: .bash}
 
@@ -454,7 +454,7 @@ this box, type the name of the "chromosome" followed by a colon and the position
 >> ## Solution
 >>
 >> ~~~
->> $ samtools tview ~/dc_workshop/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ecoli_rel606.fasta
+>> $ samtools tview ~/cs_course/SRR2584866.aligned.sorted.bam ~/cs_course/data/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >>
