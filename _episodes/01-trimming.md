@@ -138,8 +138,8 @@ $ cutadapt -q 20 -a CTGTCTCTTATACACATCT \
 {: .bash}
 
 ~~~
-[1] 12490
-Done           00:01:11     1,107,090 reads @  64.4 µs/read;   0.93 M reads/minute
+[1] 17348
+Done           00:01:10     1,107,090 reads @  63.3 µs/read;   0.95 M reads/minute
 ~~~
 {: .output}
 
