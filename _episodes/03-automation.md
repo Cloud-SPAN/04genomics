@@ -82,8 +82,8 @@ directory called `scripts/`. Previously, we used
 `nano` to create and open a new file. The command `touch` allows us to create a new file without opening that file.
 
 ~~~
-$ mkdir -p ~/dc_workshop/scripts
-$ cd ~/dc_workshop/scripts
+$ mkdir -p ~/cs_course/scripts
+$ cd ~/cs_course/scripts
 $ touch read_qc.sh
 $ ls
 ~~~
@@ -108,7 +108,7 @@ Our first line will ensure that our script will exit if an error occurs, and is 
 
 ~~~
 set -e
-cd ~/dc_workshop/data/untrimmed_fastq/
+cd ~/cs_course/data/untrimmed_fastq/
 ~~~
 {: .output}
 
@@ -124,7 +124,7 @@ fastqc *.fastq*
 Our next line will create a new directory to hold our FastQC output files. Here we are using the `-p` option for `mkdir` again. It is a good idea to use this option in your shell scripts to avoid running into errors if you don't have the directory structure you think you do.
 
 ~~~
-mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p ~/cs_course/results/fastqc_untrimmed_reads
 ~~~
 {: .output}
 
@@ -133,15 +133,15 @@ with a `.zip` or a `.html` extension to the directory we just created for storin
 
 ~~~
 echo "Saving FastQC results..."
-mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
-mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.zip ~/cs_course/results/fastqc_untrimmed_reads/
+mv *.html ~/cs_course/results/fastqc_untrimmed_reads/
 ~~~
 {: .output}
 
 The next line moves us to the results directory where we've stored our output.
 
 ~~~
-cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+cd ~/cs_course/results/fastqc_untrimmed_reads/
 ~~~
 {: .output}
 
@@ -162,7 +162,7 @@ what we're doing.
 
 ~~~
 echo "Saving summary..."
-cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > ~/cs_course/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
@@ -176,18 +176,18 @@ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 Your full shell script should now look like this:
 
 ~~~
-cd ~/dc_workshop/data/untrimmed_fastq/
+cd ~/cs_course/data/untrimmed_fastq/
 
 echo "Running FastQC ..."
 fastqc *.fastq*
 
-mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p ~/cs_course/results/fastqc_untrimmed_reads
 
 echo "Saving FastQC results..."
-mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
-mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.zip ~/cs_course/results/fastqc_untrimmed_reads/
+mv *.html ~/cs_course/results/fastqc_untrimmed_reads/
 
-cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+cd ~/cs_course/results/fastqc_untrimmed_reads/
 
 echo "Unzipping..."
 for filename in *.zip
@@ -196,7 +196,7 @@ for filename in *.zip
     done
 
 echo "Saving summary..."
-cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > ~/cs_course/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
@@ -235,7 +235,7 @@ replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]
 
 We can extend these principles to the entire variant calling workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, add variables so that the script knows to iterate through our input files and write to the appropriate output files. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
 
-Download the script from [here](https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh). Download to `~/dc_workshop/scripts`.
+Download the script from [here](https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh). Download to `~/cs_course/scripts`.
 
 ~~~
 curl -O https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh
@@ -254,7 +254,7 @@ Our variant calling workflow has the following steps:
 Let's go through this script together:
 
 ~~~
-$ cd ~/dc_workshop/scripts
+$ cd ~/cs_course/scripts
 $ less run_variant_calling.sh
 ~~~
 {: .bash}
@@ -262,7 +262,7 @@ $ less run_variant_calling.sh
 The script should look like this:
 
 ~~~
-cd ~/dc_workshop/results
+cd ~/cs_course/results
 
 bwa index ecoli_rel606.fasta
 
@@ -288,7 +288,7 @@ First, notice that we change our working directory so that we can create new res
 in the right location.
 
 ~~~
-cd ~/dc_workshop/results
+cd ~/cs_course/results
 ~~~
 {: .output}
 
@@ -404,7 +404,7 @@ $ bash run_variant_calling.sh
 >> ## Solution
 >>
 >> ~~~
->> $ for infile in ~/dc_workshop/results/vcf/*_final_variants.vcf
+>> $ for infile in ~/cs_course/results/vcf/*_final_variants.vcf
 >> > do
 >> >     echo ${infile}
 >> >     grep -v "#" ${infile} | wc -l
@@ -422,6 +422,6 @@ $ bash run_variant_calling.sh
 > ## Bonus Exercise
 >
 > If you have time after completing the previous exercise, use `run_variant_calling.sh` to run the variant calling pipeline
-> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq`, but if
+> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/cs_course/data/trimmed_fastq`, but if
 > you don't, there is a copy in `~/.solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
 {: .challenge}
