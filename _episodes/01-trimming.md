@@ -38,7 +38,7 @@ $ cutadapt
 Which will give you the following output:
 
 ~~~
-This is cutadapt 3.4 with Python 3.9.5
+This is cutadapt 3.5 with Python 3.9.5
 Command line parameters:
 Run "cutadapt --help" to see command-line options.
 See https://cutadapt.readthedocs.io/ for full documentation.
@@ -57,7 +57,7 @@ $ cutadapt -h
 There are many parameters here so we will just show the top of the output which explains the usage, but you should look through and familiarise yourself with the options available. Importantly it shows you what are the required parameters and also the version of the software you have used which is important to keep note of. You should always record what versions of software you have used and what parameters you ran the software with in order to make your analysis reproducible
 
 ~~~
-cutadapt version 3.4
+cutadapt version 3.5
 
 Copyright (C) 2010-2021 Marcel Martin <marcel.martin@scilifelab.se>
 
@@ -137,6 +137,7 @@ $ cutadapt -q 20 -a CTGTCTCTTATACACATCT \
 ~~~
 {: .bash}
 
+When you have submitted the command, you will see a number in square brackets like below, this is the number assigned to the job on the system so the number will vary. You will know when your job is done when the output says Done
 ~~~
 [1] 17348
 Done           00:01:10     1,107,090 reads @  63.3 µs/read;   0.95 M reads/minute
@@ -267,6 +268,8 @@ SRR2584863_1.trim.fastq.gz    SRR2589044_2.fastq.gz
 SRR2584866_2.fastq.gz         SRR2589044_2.trim.fastq.gz
 SRR2584863_2.fastq.gz         SRR2584866_2.trim.fastq.gz
 SRR2584863_2.trim.fastq.gz    SRR2589044_1.fastq.gz
+SRR2584863_fastq.gz.log       SRR2584866_fastq.gz.log
+SRR2589044_fastq.gz.log
 ~~~
 {: .output}
 

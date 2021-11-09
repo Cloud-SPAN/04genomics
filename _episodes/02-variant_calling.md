@@ -115,7 +115,7 @@ samples in our dataset (`SRR2584866`). Later, we'll be
 iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa mem data/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > SRR2584866.aligned.sam
+$ bwa mem data/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/SRR2584866.aligned.sam
 ~~~
 {: .bash}
 
@@ -155,18 +155,13 @@ displayed below with the different fields highlighted.
 
 ![sam_bam2](../img/sam_bam3.png)
 
-We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`):
+We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`). We will be doing the next few commands in the results folder, so we will change into that directory first:
 
 ~~~
+$ cd results
 $ samtools view -S -b SRR2584866.aligned.sam > SRR2584866.aligned.bam
 ~~~
 {: .bash}
-
-~~~
-[samopen] SAM header is present: 1 sequences.
-~~~
-{: .output}
-
 
 ### Sort BAM file by coordinates
 
@@ -230,12 +225,13 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 
 ~~~
 $ bcftools mpileup -O b -o SRR2584866_raw.bcf \
--f data/ecoli_rel606.fasta SRR2584866.aligned.sorted.bam
+-f ../data/ecoli_rel606.fasta SRR2584866.aligned.sorted.bam
 ~~~
 {: .bash}
 
 ~~~
 [mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250
 ~~~
 {: .output}
 
@@ -479,7 +475,7 @@ lesson.
 > time-consuming and frustrating task - however, this does mean that
 > you won't be able to walk out the door and start doing these
 > analyses on your own computer. You'll need to install
-> the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/setup.html) for more information 
+> the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/setup.html) for more information
 > on installing these software packages.
 {: .callout}
 
