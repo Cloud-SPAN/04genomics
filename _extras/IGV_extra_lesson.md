@@ -18,7 +18,7 @@ This extra lesson is optional and requires you to download software to your own 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
 Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for
 demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and
-instead organize files within a directory structure like we've been using in our `dc_workshop` directory.
+instead organize files within a directory structure like we've been using in our `cs_course` directory.
 
 ~~~
 $ mkdir ~/Desktop/files_for_igv
@@ -31,10 +31,10 @@ with your AWS instance number. The commands to `scp` always go in the terminal w
 local computer (not your AWS instance).
 
 ~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv
+$ scp csuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv
+$ scp csuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv
+$ scp csuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/data/ecoli_rel606.fasta ~/Desktop/files_for_igv
+$ scp csuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv
 ~~~
 {: .bash}
 
