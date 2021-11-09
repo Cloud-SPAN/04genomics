@@ -374,7 +374,7 @@ bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub
 
 > ## Exercise
 > It's a good idea to add comments to your code so that you (or a collaborator) can make sense of what you did later.
-> Look through your existing script. Discuss with a neighbor where you should add comments. Add comments (anything following
+> Look through your existing script. In a breakout room, discuss  where you should add comments. Add comments (anything following
 > a `#` character will be interpreted as a comment, bash will not try to run these comments as code).
 {: .challenge}
 
