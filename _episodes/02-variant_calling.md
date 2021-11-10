@@ -399,7 +399,7 @@ It uses different colors to display mapping quality or base quality, subjected t
 In order to visualize our mapped reads, we use `tview`, giving it the sorted bam file and the reference file:
 
 ~~~
-$ samtools tview SRR2584866.aligned.sorted.bam data/ecoli_rel606.fasta
+$ samtools tview SRR2584866.aligned.sorted.bam ../data/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
