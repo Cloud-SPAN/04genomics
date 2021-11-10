@@ -269,7 +269,7 @@ do
 	samtools view -S -b $file.sam > $file.aligned.bam
 	samtools sort -o $file.aligned.sorted.bam $file.aligned.bam
 	samtools index $file.aligned.sorted.bam
-	bcftools mpileup -O b -o $file\_raw.bcf -f ecoli_rel606.fasta $file.aligned.sorted.bam
+	bcftools mpileup -O b -o $file\_raw.bcf -f ../data/ecoli_rel606.fasta $file.aligned.sorted.bam
 	bcftools call --ploidy 1 -m -v -o $file\_variants.vcf $file\_raw.bcf
 	vcfutils.pl varFilter $file\_variants.vcf > $file\_final_variants.vcf
 
@@ -352,7 +352,7 @@ bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub
 5) calculate the read coverage of positions in the genome:
 
 ~~~
-    bcftools mpileup -O b -o $file\_raw.bcf -f ecoli_rel606.fasta $file.aligned.sorted.bam
+    bcftools mpileup -O b -o $file\_raw.bcf -f ../data/ecoli_rel606.fasta $file.aligned.sorted.bam
 ~~~
 {: .output}
 
