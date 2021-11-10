@@ -40,12 +40,12 @@ In the FastQC section, learners will download FastQC output files in order to op
 
 Command as is: 
 ~~~
-scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+scp csuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
 
 Command for learners to use:
 ~~~
-scp dcuser@<Public_DNS>:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+scp csuser@<Public_DNS>:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
 
 #### The unzip for loop

@@ -315,7 +315,7 @@ SRR2584863_2.trim.fastq.gz    SRR2584866_2.trim.fastq.gz    SRR2589044_2.trim.fa
 >>
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
+>> $ scp csuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/cs_course/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
 >> ~~~
 >> {: .bash}
 >>
