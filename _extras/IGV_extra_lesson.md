@@ -18,7 +18,7 @@ This extra lesson is optional and requires you to download software to your own 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
 Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for
 demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and
-instead organize files within a directory structure like we've been using in our `cs_course` directory.
+instead organise files within a directory structure like we've been using in our `cs_course` directory.
 
 ~~~
 $ mkdir ~/Desktop/files_for_igv
