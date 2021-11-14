@@ -64,7 +64,7 @@ $ for infile in SRR2584863 SRR2584866 SRR2589044
 
 {: .bash}
 
-Notice that in this `for` loop, we used two variables, `infile`, which was defined in the `for` statement, and `base`, which was created from the filename during each iteration of the loop.
+Notice that in this `for` loop, we used one variable, `infile`, which was defined in the `for` statement.
 
 > ## Creating Variables
 > Within the Bash shell you can create variables at any time (as we did
@@ -82,8 +82,8 @@ directory called `scripts/`. Previously, we used
 `nano` to create and open a new file. The command `touch` allows us to create a new file without opening that file.
 
 ~~~
-$ mkdir -p ~/dc_workshop/scripts
-$ cd ~/dc_workshop/scripts
+$ mkdir -p ~/cs_course/scripts
+$ cd ~/cs_course/scripts
 $ touch read_qc.sh
 $ ls
 ~~~
@@ -108,7 +108,7 @@ Our first line will ensure that our script will exit if an error occurs, and is 
 
 ~~~
 set -e
-cd ~/dc_workshop/data/untrimmed_fastq/
+cd ~/cs_course/data/untrimmed_fastq/
 ~~~
 {: .output}
 
@@ -124,7 +124,7 @@ fastqc *.fastq*
 Our next line will create a new directory to hold our FastQC output files. Here we are using the `-p` option for `mkdir` again. It is a good idea to use this option in your shell scripts to avoid running into errors if you don't have the directory structure you think you do.
 
 ~~~
-mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p ~/cs_course/results/fastqc_untrimmed_reads
 ~~~
 {: .output}
 
@@ -133,15 +133,15 @@ with a `.zip` or a `.html` extension to the directory we just created for storin
 
 ~~~
 echo "Saving FastQC results..."
-mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
-mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.zip ~/cs_course/results/fastqc_untrimmed_reads/
+mv *.html ~/cs_course/results/fastqc_untrimmed_reads/
 ~~~
 {: .output}
 
 The next line moves us to the results directory where we've stored our output.
 
 ~~~
-cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+cd ~/cs_course/results/fastqc_untrimmed_reads/
 ~~~
 {: .output}
 
@@ -162,7 +162,7 @@ what we're doing.
 
 ~~~
 echo "Saving summary..."
-cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > ~/cs_course/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
@@ -176,18 +176,18 @@ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 Your full shell script should now look like this:
 
 ~~~
-cd ~/dc_workshop/data/untrimmed_fastq/
+cd ~/cs_course/data/untrimmed_fastq/
 
 echo "Running FastQC ..."
 fastqc *.fastq*
 
-mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p ~/cs_course/results/fastqc_untrimmed_reads
 
 echo "Saving FastQC results..."
-mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
-mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.zip ~/cs_course/results/fastqc_untrimmed_reads/
+mv *.html ~/cs_course/results/fastqc_untrimmed_reads/
 
-cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+cd ~/cs_course/results/fastqc_untrimmed_reads/
 
 echo "Unzipping..."
 for filename in *.zip
@@ -196,13 +196,14 @@ for filename in *.zip
     done
 
 echo "Saving summary..."
-cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > ~/cs_course/docs/fastqc_summaries.txt
 ~~~
 {: .output}
 
-Save your file and exit `nano`. We can now run our script:
+Save your file and exit `nano`. We can now run our script. Use pwd to check which directory you are in, if you are not in the scripts directory cd into the correct place as shown below, before running the script:
 
 ~~~
+$ cd ~/cs_course/scripts/
 $ bash read_qc.sh
 ~~~
 {: .bash}
@@ -235,13 +236,6 @@ replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]
 
 We can extend these principles to the entire variant calling workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, add variables so that the script knows to iterate through our input files and write to the appropriate output files. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
 
-Download the script from [here](https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh). Download to `~/dc_workshop/scripts`.
-
-~~~
-curl -O https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh
-~~~
-{: .bash}
-
 Our variant calling workflow has the following steps:
 
 1. Index the reference genome for use by bwa and samtools.
@@ -251,29 +245,31 @@ Our variant calling workflow has the following steps:
 5. Detect the single nucleotide polymorphisms (SNPs).
 6. Filter and report the SNP variants in VCF (variant calling format).
 
-Let's go through this script together:
+Let's go through this script together. Lets first cd into the scripts folder and open nano with the following command:
+
+
 
 ~~~
-$ cd ~/dc_workshop/scripts
-$ less run_variant_calling.sh
+$ cd ~/cs_course/scripts
+$ nano run_variant_calling.sh
 ~~~
 {: .bash}
 
-The script should look like this:
+The script should look like this. You should copy and paste the contents of the output box below and save the script. We can then go through the script line by line:
 
 ~~~
-cd ~/dc_workshop/results
+cd ~/cs_course/results
 
-bwa index ecoli_rel606.fasta
+bwa index ../data/ecoli_rel606.fasta
 
 for file in SRR2584863 SRR2584866 SRR2589044
 do
 	echo "working with file $file"
-	bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $file.aligned.sam
+	bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub.fastq ../data/trimmed_fastq_small/$file\_2.trim.sub.fastq > $file.aligned.sam
 	samtools view -S -b $file.sam > $file.aligned.bam
 	samtools sort -o $file.aligned.sorted.bam $file.aligned.bam
 	samtools index $file.aligned.sorted.bam
-	bcftools mpileup -O b -o $file\_raw.bcf -f ecoli_rel606.fasta $file.aligned.sorted.bam
+	bcftools mpileup -O b -o $file\_raw.bcf -f ../data/ecoli_rel606.fasta $file.aligned.sorted.bam
 	bcftools call --ploidy 1 -m -v -o $file\_variants.vcf $file\_raw.bcf
 	vcfutils.pl varFilter $file\_variants.vcf > $file\_final_variants.vcf
 
@@ -288,14 +284,14 @@ First, notice that we change our working directory so that we can create new res
 in the right location.
 
 ~~~
-cd ~/dc_workshop/results
+cd ~/cs_course/results
 ~~~
 {: .output}
 
 Next we index our reference genome for BWA:
 
 ~~~
-bwa index ecoli_rel606.fasta
+bwa index ../data/ecoli_rel606.fasta
 ~~~
 {: .output}
 
@@ -316,10 +312,10 @@ do
 {: .bash}
 
 We are using the base of this name and in order to access both the _1 and _2 input files we use
-$file and the rest of the file name _2.trim.sub.fastq for the _2 input file. The first time through this loop the computer will interpret '$file\_2.trim.sub.fastq' as SRR2584863_2.trim.sub.fastq. The '\' is a special character which allows us to add the variable name $file to the string to _2.trim.sub.fastq
+$file and the rest of the file name _2.trim.sub.fastq for the _2 input file. The first time through this loop the computer will interpret '$file\_2.trim.sub.fastq' as SRR2584863_2.trim.sub.fastq. The '\' is a special character which allows us to add the variable name $file to the string to _2.trim.sub.fastq. These files are one folder up in the data folder, and then within a folder within this, called trimmed_fastq_small.
 
 ~~~
-bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $file.aligned.sam
+bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub.fastq ../data/trimmed_fastq_small/$file\_2.trim.sub.fastq > $file.aligned.sam
 ~~~
 {: .bash}
 
@@ -328,7 +324,7 @@ And finally, the actual workflow steps:
 1) align the reads to the reference genome and output a `.sam` file:
 
 ~~~
-bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $file.aligned.sam
+bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub.fastq ../data/trimmed_fastq_small/$file\_2.trim.sub.fastq > $file.aligned.sam
 ~~~
 {: .output}
 
@@ -356,7 +352,7 @@ bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $fi
 5) calculate the read coverage of positions in the genome:
 
 ~~~
-    bcftools mpileup -O b -o $file\_raw.bcf -f ecoli_rel606.fasta $file.aligned.sorted.bam
+    bcftools mpileup -O b -o $file\_raw.bcf -f ../data/ecoli_rel606.fasta $file.aligned.sorted.bam
 ~~~
 {: .output}
 
@@ -378,7 +374,7 @@ bwa mem ecoli_rel606.fasta $file\_1.trim.sub.fastq $file\_2.trim.sub.fastq > $fi
 
 > ## Exercise
 > It's a good idea to add comments to your code so that you (or a collaborator) can make sense of what you did later.
-> Look through your existing script. Discuss with a neighbor where you should add comments. Add comments (anything following
+> Look through your existing script. In a breakout room, discuss  where you should add comments. Add comments (anything following
 > a `#` character will be interpreted as a comment, bash will not try to run these comments as code).
 {: .challenge}
 
@@ -404,7 +400,7 @@ $ bash run_variant_calling.sh
 >> ## Solution
 >>
 >> ~~~
->> $ for infile in ~/dc_workshop/results/vcf/*_final_variants.vcf
+>> $ for infile in ~/cs_course/results/vcf/*_final_variants.vcf
 >> > do
 >> >     echo ${infile}
 >> >     grep -v "#" ${infile} | wc -l
@@ -422,6 +418,6 @@ $ bash run_variant_calling.sh
 > ## Bonus Exercise
 >
 > If you have time after completing the previous exercise, use `run_variant_calling.sh` to run the variant calling pipeline
-> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq`, but if
+> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/cs_course/data/trimmed_fastq`, but if
 > you don't, there is a copy in `~/.solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
 {: .challenge}

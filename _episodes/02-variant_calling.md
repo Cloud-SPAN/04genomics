@@ -36,7 +36,7 @@ The alignment process consists of two steps:
 First we download the reference genome for *E. coli* REL606. Although we could copy or move the file with `cp` or `mv`, most genomics workflows begin with a download step, so we will practice that here.
 
 ~~~
-$ cd ~/dc_workshop
+$ cd ~/cs_course
 $ curl -L -o data/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
 $ gunzip data/ecoli_rel606.fasta.gz
 ~~~
@@ -65,7 +65,7 @@ and will enable us to run our variant calling workflow quite quickly.
 ~~~
 $ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 $ tar xvf sub.tar.gz
-$ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
+$ mv sub/ ~/cs_course/data/trimmed_fastq_small
 ~~~
 {: .bash}
 
@@ -115,7 +115,7 @@ samples in our dataset (`SRR2584866`). Later, we'll be
 iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa mem data/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > SRR2584866.aligned.sam
+$ bwa mem data/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/SRR2584866.aligned.sam
 ~~~
 {: .bash}
 
@@ -155,25 +155,20 @@ displayed below with the different fields highlighted.
 
 ![sam_bam2](../img/sam_bam3.png)
 
-We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`):
+We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`). We will be doing the next few commands in the results folder, so we will change into that directory first:
 
 ~~~
+$ cd results
 $ samtools view -S -b SRR2584866.aligned.sam > SRR2584866.aligned.bam
 ~~~
 {: .bash}
-
-~~~
-[samopen] SAM header is present: 1 sequences.
-~~~
-{: .output}
-
 
 ### Sort BAM file by coordinates
 
 Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
 
 ~~~
-$ samtools sort -o /SRR2584866.aligned.sorted.bam SRR2584866.aligned.bam
+$ samtools sort -o SRR2584866.aligned.sorted.bam SRR2584866.aligned.bam
 ~~~
 {: .bash}
 
@@ -230,12 +225,13 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 
 ~~~
 $ bcftools mpileup -O b -o SRR2584866_raw.bcf \
--f data/ecoli_rel606.fasta SRR2584866.aligned.sorted.bam
+-f ../data/ecoli_rel606.fasta SRR2584866.aligned.sorted.bam
 ~~~
 {: .bash}
 
 ~~~
 [mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250
 ~~~
 {: .output}
 
@@ -403,7 +399,7 @@ It uses different colors to display mapping quality or base quality, subjected t
 In order to visualize our mapped reads, we use `tview`, giving it the sorted bam file and the reference file:
 
 ~~~
-$ samtools tview SRR2584866.aligned.sorted.bam data/ecoli_rel606.fasta
+$ samtools tview SRR2584866.aligned.sorted.bam ../data/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
@@ -454,7 +450,7 @@ this box, type the name of the "chromosome" followed by a colon and the position
 >> ## Solution
 >>
 >> ~~~
->> $ samtools tview ~/dc_workshop/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ecoli_rel606.fasta
+>> $ samtools tview ~/cs_course/SRR2584866.aligned.sorted.bam ~/cs_course/data/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >>
@@ -463,57 +459,6 @@ this box, type the name of the "chromosome" followed by a colon and the position
 >> in the gene *mutL*, which controls DNA mismatch repair.
 > {: .solution}
 {: .challenge}
-
-### Viewing with IGV
-
-[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
-
-In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
-Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for
-demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and
-instead organize files within a directory structure like we've been using in our `dc_workshop` directory.
-
-~~~
-$ mkdir ~/Desktop/files_for_igv
-$ cd ~/Desktop/files_for_igv
-~~~
-{: .bash}
-
-Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:`
-with your AWS instance number. The commands to `scp` always go in the terminal window that is connected to your
-local computer (not your AWS instance).
-
-~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv
-~~~
-{: .bash}
-
-You will need to type the password for your AWS instance each time you call `scp`.
-
-Next, we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
-to unzip it, and then drag the program into your Applications folder.
-
-1. Open IGV.
-2. Load our reference genome file (`ecoli_rel606.fasta`) into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
-3. Load our BAM file (`SRR2584866.aligned.sorted.bam`) using the **"Load from File..."** option under the **"File"** pull-down menu.
-4.  Do the same with our VCF file (`SRR2584866_final_variants.vcf`).
-
-Your IGV browser should look like the screenshot below:
-
-![IGV](../img/igv-screenshot.png)
-
-There should be two tracks: one coresponding to our BAM file and the other for our VCF file.
-
-In the **VCF track**, each bar across the top of the plot shows the allele fraction for a single locus. The second bar shows
-the genotypes for each locus in each *sample*. We only have one sample called here, so we only see a single line. Dark blue =
-heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are transparent.
-
-Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information
-corresponds to alignment information at those loci.
-Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
 Now that we've run through our workflow for a single sample, we want to repeat this workflow for our other five
 samples. However, we don't want to type each of these individual steps again five more times. That would be very
@@ -530,7 +475,7 @@ lesson.
 > time-consuming and frustrating task - however, this does mean that
 > you won't be able to walk out the door and start doing these
 > analyses on your own computer. You'll need to install
-> the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/setup.html) for more information 
+> the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/setup.html) for more information
 > on installing these software packages.
 {: .callout}
 
