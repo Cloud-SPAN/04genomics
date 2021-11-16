@@ -75,7 +75,7 @@ Notice that in this `for` loop, we used one variable, `infile`, which was define
 
 In this lesson, we'll use two shell scripts to automate the variant calling analysis: one for FastQC analysis (including creating our summary file), and a second for the remaining variant calling. To write a script to run our FastQC analysis, we'll take each of the commands we entered to run FastQC and process the output files and put them into a single file with a `.sh` extension. The `.sh` is not essential, but serves as a reminder to ourselves and to the computer that this is a shell script.
 
-# Analyzing Quality with FastQC
+# analysing Quality with FastQC
 
 We will use the command `touch` to create a new file where we will write our shell script. We will create this script in a new
 directory called `scripts/`. Previously, we used
@@ -374,8 +374,8 @@ bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub
 
 > ## Exercise
 > It's a good idea to add comments to your code so that you (or a collaborator) can make sense of what you did later.
-> Look through your existing script. In a breakout room, discuss  where you should add comments. Add comments (anything following
-> a `#` character will be interpreted as a comment, bash will not try to run these comments as code).
+> Look through your existing script and add comments to describe what it does. Anything following
+> a `#` character will be interpreted as a comment - the terminal will not try to run these comments as code.
 {: .challenge}
 
 
@@ -393,6 +393,8 @@ $ bash run_variant_calling.sh
 > beginning of our variant calling workflow. From the metadata table, we know that SRR2589044 was from generation 5000,
 > SRR2584863 was from generation 15000, and SRR2584866 was from generation 50000. How did the number of mutations per sample change
 > over time? Examine the metadata table. What is one reason the number of mutations may have changed the way they did?
+>
+> Discuss these questions in your breakout rooms. Nominate someone to put a summary of your thoughts onto the Padlet.
 >
 > Hint: You can find a copy of the output files for the subsampled trimmed FASTQ file variant calling in the
 > `~/.solutions/wrangling-solutions/variant_calling_auto/` directory.

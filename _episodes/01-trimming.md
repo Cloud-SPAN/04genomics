@@ -182,7 +182,7 @@ Total written (filtered):    290,141,080 bp (87.4%)
 > ## Exercise
 >
 > Use the output from your cutadapt command to answer the
-> following questions.
+> following questions. Share your thoughts on the Padlet.
 >
 > 1) How many reads had adapters in the R1 reads?
 > 2) What total percent of reads were trimmed/filtered?

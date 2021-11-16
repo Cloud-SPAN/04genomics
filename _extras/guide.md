@@ -105,7 +105,7 @@ $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866
 ~~~
 
 #### The Automation Episode
-The code blocks at the beginning of the automation episode (05-automation.md) are examples of for loops and scripts and are not meant to be run by learners. The first code chunks that should be run are under Analyzing Quality with FastQC. 
+The code blocks at the beginning of the automation episode (05-automation.md) are examples of for loops and scripts and are not meant to be run by learners. The first code chunks that should be run are under analysing Quality with FastQC. 
 
 Also, after the first code chunk of code meant to be run, there is a line that reads only `read_qc.sh` and will yield a message saying that this command wasn't found. After the creation of the script, this command will run the script that will be written.
 

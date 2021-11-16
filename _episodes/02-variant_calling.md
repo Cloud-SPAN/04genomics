@@ -126,12 +126,12 @@ You will see output that starts like this:
 [M::process] read 77446 sequences (10000033 bp)...
 [M::process] read 77296 sequences (10000182 bp)...
 [M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
-[M::mem_pestat] analyzing insert size distribution for orientation FF...
+[M::mem_pestat] analysing insert size distribution for orientation FF...
 [M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
 [M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
 [M::mem_pestat] mean and std.dev: (784.68, 700.87)
 [M::mem_pestat] low and high boundaries for proper pairs: (1, 5836)
-[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] analysing insert size distribution for orientation FR...
 ~~~
 {: .output}
 
@@ -356,7 +356,7 @@ to learn more about the VCF file format.
 
 > ## Exercise
 >
-> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file.
+> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. Share your answer on the Padlet.
 >
 >> ## Solution
 >>
@@ -446,6 +446,8 @@ this box, type the name of the "chromosome" followed by a colon and the position
 >
 > Visualize the alignment of the reads for our `SRR2584866` sample. What variant is present at
 > position 4377265? What is the canonical nucleotide in that position?
+>
+> Share your answers on the Padlet.
 >
 >> ## Solution
 >>
