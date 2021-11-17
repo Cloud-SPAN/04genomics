@@ -372,11 +372,11 @@ bwa mem ../data/ecoli_rel606.fasta ../data/trimmed_fastq_small/$file\_1.trim.sub
 
 
 
-> ## Exercise
+> ## Commenting your code
 > It's a good idea to add comments to your code so that you (or a collaborator) can make sense of what you did later.
 > Look through your existing script and add comments to describe what it does. Anything following
 > a `#` character will be interpreted as a comment - the terminal will not try to run these comments as code.
-{: .challenge}
+{: .callout}
 
 
 Now we can run our script:
