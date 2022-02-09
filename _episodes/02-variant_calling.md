@@ -390,77 +390,56 @@ $ samtools index SRR2584866.aligned.sorted.bam
 ~~~
 {: .bash}
 
-### Viewing with `tview`
+### Viewing with IGV
 
-[Samtools](http://www.htslib.org/) implements a very simple text alignment viewer based on the GNU
-`ncurses` library, called `tview`. This alignment viewer works with short indels and shows [MAQ](http://maq.sourceforge.net/) consensus.
-It uses different colors to display mapping quality or base quality, subjected to users' choice. Samtools viewer is known to work with a 130 GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
+[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
-In order to visualize our mapped reads, we use `tview`, giving it the sorted bam file and the reference file:
+In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
+Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for
+demonstration purposes, but in general you should avoid proliferating folders and files on your Desktop and
+instead organize files within a directory structure like we've been using in our `cloudspan` directory.
 
 ~~~
-$ samtools tview SRR2584866.aligned.sorted.bam ../data/ecoli_rel606.fasta
+$ mkdir ~/Desktop/cloudspan/files_for_igv
+$ cd ~/Desktop/cloudspan/files_for_igv
 ~~~
 {: .bash}
 
+Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:`
+with your AWS instance number. The commands to `scp` always go in the terminal window that is connected to your
+local computer (not your AWS instance).
+
 ~~~
-1         11        21        31        41        51        61        71        81        91        101       111       121
-AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATAC
-..................................................................................................................................
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ..................N................. ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,........................
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ..................N................. ,,,,,,,,,,,,,,,,,,,,,,,,,,,.............................
-...................................,g,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ....................................   ................
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,....................................   ....................................      ,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ....................................  ,,a,,,,,,,,,,,,,,,,,,,,,,,,,,,,,     .......
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, .............................  ,,,,,,,,,,,,,,,,,g,,,,,    ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ...........................T.......   ,,,,,,,,,,,,,,,,,,,,,,,c,          ......
-......................... ................................   ,g,,,,,,,,,,,,,,,,,,,      ...........................
-,,,,,,,,,,,,,,,,,,,,, ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ,,,,,,,,,,,,,,,,,,,,,,,,,,,       ..........................
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,   ................................T..  ..............................   ,,,,,,
-...........................       ,,,,,,g,,,,,,,,,,,,,,,,,   ....................................         ,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,, ....................................  ...................................        ....
-....................................  ........................  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,      ....
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,   ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-........................            .................................. .............................     ....
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,   ....................................        ..........................
-...............................       ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ....................................
-...................................  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ..................................
-.................................... ,,,,,,,,,,,,,,,,,,a,,,,,,,,,,,,,,,,,        ,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ............................ ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/results/SRR2584866.aligned.sorted.bam ~/Desktop/cloudspan/files_for_igv
+$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/results/SRR2584866.aligned.sorted.bam.bai ~/Desktop/cloudspan/files_for_igv
+$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/data/ecoli_rel606.fasta ~/Desktop/cloudspan/files_for_igv
+$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/results/SRR2584866_final_variants.vcf ~/Desktop/cloudspan/files_for_igv
 ~~~
-{: .output}
+{: .bash}
 
-The first line of output shows the genome coordinates in our reference genome. The second line shows the reference
-genome sequence. The third line shows the consensus sequence determined from the sequence reads. A `.` indicates
-a match to the reference sequence, so we can see that the consensus from our sample matches the reference in most
-locations. That is good! If that wasn't the case, we should probably reconsider our choice of reference.
+You will need to type the password for your AWS instance each time you call `scp`.
 
-Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only
-positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
-to scroll or type `?` for a help menu. To navigate to a specific position, type `g`. A dialogue box will appear. In
-this box, type the name of the "chromosome" followed by a colon and the position of the variant you would like to view
-(e.g. for this sample, type `CP000819.1:50` to view the 50th base. Type `Ctrl^C` or `q` to exit `tview`.
+Next, we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
+to unzip it, and then drag the program into your Applications folder.
 
-> ## Exercise
->
-> Visualize the alignment of the reads for our `SRR2584866` sample. What variant is present at
-> position 4377265? What is the canonical nucleotide in that position?
->
-> Share your answers on the Padlet.
->
->> ## Solution
->>
->> ~~~
->> $ samtools tview ~/cs_course/SRR2584866.aligned.sorted.bam ~/cs_course/data/ecoli_rel606.fasta
->> ~~~
->> {: .bash}
->>
->> Then type `g`. In the dialogue box, type `CP000819.1:4377265`.
->> `G` is the variant. `A` is canonical. This variant possibly changes the phenotype of this sample to hypermutable. It occurs
->> in the gene *mutL*, which controls DNA mismatch repair.
-> {: .solution}
-{: .challenge}
+1. Open IGV.
+2. Load our reference genome file (`ecoli_rel606.fasta`) into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
+3. Load our BAM file (`SRR2584866.aligned.sorted.bam`) using the **"Load from File..."** option under the **"File"** pull-down menu.
+4.  Do the same with our VCF file (`SRR2584866_final_variants.vcf`).
+
+Your IGV browser should look like the screenshot below:
+
+![IGV](../img/igv-screenshot.png)
+
+There should be two tracks: one coresponding to our BAM file and the other for our VCF file.
+
+In the **VCF track**, each bar across the top of the plot shows the allele fraction for a single locus. The second bar shows
+the genotypes for each locus in each *sample*. We only have one sample called here, so we only see a single line. Dark blue =
+heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are transparent.
+
+Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information
+corresponds to alignment information at those loci.
+Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
 Now that we've run through our workflow for a single sample, we want to repeat this workflow for our other five
 samples. However, we don't want to type each of these individual steps again five more times. That would be very
@@ -468,6 +447,8 @@ time consuming and error-prone, and would become impossible as we gathered more 
 already know the tools we need to use to automate this workflow and run it on as many files as we want using a
 single line of code. Those tools are: wildcards, for loops, and bash scripts. We'll use all three in the next
 lesson.
+
+
 
 > ## Installing Software
 >
