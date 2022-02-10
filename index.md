@@ -3,7 +3,7 @@ layout: lesson
 root: .
 ---
 
-[Last lesson](https://cloud-span.github.io/genomics04-data-preparation-organisation/) you performed quality control on your reads. This lesson we will align those reads to a reference genome, and end by identifying and visualizing variations among these
+[Last lesson](https://cloud-span.github.io/03genomics/) you performed quality control on your reads. This lesson we will align those reads to a reference genome, and end by identifying and visualizing variations among these
 samples. 
 
 As you progress through this lesson, keep in mind that, even if you aren't going to be doing this same workflow in your research, 
@@ -14,12 +14,12 @@ We will also be learning about the power of automation when repeating similar wo
 
 > ## Prerequisites
 >
-> This lesson assumes a working understanding of the bash shell. If you haven't already completed the [Using the Command Line](https://cloud-span.github.io/genomics03-using-the-command-line/) lesson, and aren't familiar with the bash shell, please review those materials
+> This lesson assumes a working understanding of the bash shell. If you haven't already completed the [Prenomics Course](https://cloud-span.github.io/prenomics00-intro/) lesson, and aren't familiar with the bash shell, please review those materials
 > before starting this lesson.
 >
 > This lesson also assumes some familiarity with biological concepts, including the structure of DNA, nucleotide abbreviations, and the 
 > concept of genomic variation within a population. 
 >
 > This lesson uses data hosted on an Amazon Machine Instance (AMI). Course participants will be given information on how
-> to log-in to the AMI during the course. Information on preparing for the course is provided on the [Cloud-SPAN Genomics Course setup page](setup).
+> to log-in to the AMI during the course. Information on preparing for the course is provided on the [Cloud-SPAN Genomics Course setup page](https://cloud-span.github.io/00genomics/setup.html).
 {: .prereq}
