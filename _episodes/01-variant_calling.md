@@ -38,9 +38,18 @@ First we download the reference genome for *E. coli* REL606. Although we could c
 ~~~
 $ cd ~/cs_course
 $ curl -L -o data/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+~~~
+{: .bash}
+
+The `-L` flag stands for location. If the server reports that the requested page has moved then `curl` will redo the request on the new page. The `-o` flag means the output goes to a file rather than the terminal.
+
+The file `ecoli_rel606.fasta.gz` has been dowloaded to the `data` folder since we specified `data/ecoli_rel606.fasta.gz` in the `curl` command. This file needs to be decompressed (unzipped) with:
+
+~~~
 $ gunzip data/ecoli_rel606.fasta.gz
 ~~~
 {: .bash}
+
 
 > ## Exercise
 >
@@ -64,7 +73,21 @@ and will enable us to run our variant calling workflow quite quickly.
 
 ~~~
 $ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
+~~~
+{: .bash}
+
+The `sub.tar.gz` file also needs to be decompressed.
+
+~~~
 $ tar xvf sub.tar.gz
+~~~
+{: .bash}
+
+You now have a folder, `sub` containing six `.fastq` files. 
+
+Let's put this folder inside of `data` folder using `mv`. Since the name `sub` is not very informative, we can rename it to `trimmed_fastq_small` at the same time.
+
+~~~
 $ mv sub/ ~/cs_course/data/trimmed_fastq_small
 ~~~
 {: .bash}
@@ -356,7 +379,7 @@ to learn more about the VCF file format.
 
 > ## Exercise
 >
-> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. Share your answer on the Padlet.
+> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. Share your answer on the [Forum](https://cloudspan.peerboard.com/space/1783234884).
 >
 >> ## Solution
 >>
