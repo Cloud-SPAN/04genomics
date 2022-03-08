@@ -83,7 +83,7 @@ $ tar xvf sub.tar.gz
 ~~~
 {: .bash}
 
-You now have a folder, `sub` containing six `.fastq` files. 
+You now have a folder, `sub` containing six `.fastq` files.
 
 Let's put this folder inside of `data` folder using `mv`. Since the name `sub` is not very informative, we can rename it to `trimmed_fastq_small` at the same time.
 
@@ -481,7 +481,7 @@ lesson.
 > time-consuming and frustrating task - however, this does mean that
 > you won't be able to walk out the door and start doing these
 > analyses on your own computer. You'll need to install
-> the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/setup.html) for more information
+> the software first. Look at the [setup instructions](https://software.broadinstitute.org/software/igv/download) for more information
 > on installing these software packages.
 {: .callout}
 
