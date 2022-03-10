@@ -54,7 +54,9 @@ $ gunzip data/ecoli_rel606.fasta.gz
 > ## Exercise
 >
 > We saved this file as `data/ecoli_rel606.fasta.gz` and then decompressed it.
-> What is the real name of the genome?
+> What is the real name of the genome? Share your answer on the [forum](https://cloudspan.peerboard.com/post/1971354811).
+>
+> Hint: the name of the genome is often recorded at the top of the file.
 >
 >> ## Solution
 >>
@@ -379,7 +381,7 @@ to learn more about the VCF file format.
 
 > ## Exercise
 >
-> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. Share your answer on the [Forum](https://cloudspan.peerboard.com/space/1783234884).
+> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. Share your answer on the [forum](https://cloudspan.peerboard.com/post/1386695982).
 >
 >> ## Solution
 >>
