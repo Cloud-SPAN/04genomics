@@ -433,10 +433,10 @@ with your AWS instance number. The commands to `scp` always go in the terminal w
 local computer (not your AWS instance).
 
 ~~~
-$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/results/SRR2584866.aligned.sorted.bam ~/Desktop/cloudspan/files_for_igv
-$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/results/SRR2584866.aligned.sorted.bam.bai ~/Desktop/cloudspan/files_for_igv
-$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/data/ecoli_rel606.fasta ~/Desktop/cloudspan/files_for_igv
-$ scp csuser@instanceNN-gc.cloud-span.aws.york.ac.uk:/home/cs_course/results/SRR2584866_final_variants.vcf ~/Desktop/cloudspan/files_for_igv
+$ scp csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866.aligned.sorted.bam* ~/Desktop/cloudspan/files_for_igv
+$ scp csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/data/ecoli_rel606.fasta ~/Desktop/cloudspan/files_for_igv
+$ scp csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866_final_variants.vcf ~/Desktop/cloudspan/files_for_igv
+
 ~~~
 {: .bash}
 
