@@ -1,0 +1,47 @@
+cff-version: 1.1.0
+message: "If you reuse this training material, please cite it as below."
+authors:
+- family-names: "Buenabad-Chavez"
+  given-names: "Jorge"
+- family-names: "Cansdale"
+  given-names: "Annabel"
+  orcid: "https://orcid.org/0000-0001-9548-3110"
+- family-names: "Chong"
+  given-names: "James"
+  orcid: "https://orcid.org/0000-0001-9447-7421"
+- family-names: "Forrester"
+  given-names: "Sarah"
+  orcid: "https://orcid.org/0000-0001-8332-7196"
+- family-names: "Greeves"
+  given-names: "Evelyn"
+  orcid: "https://orcid.org/0000-0003-4800-3422"
+- family-names: "Rand"
+  given-names: "Emma"
+  orcid: "https://orcid.org/0000-0002-1358-8275"
+title: "Cloud-SPAN Genomics Course: Data Processing & Analysis"
+version: 0.1.0
+doi: 10.5281/zenodo.5584512
+date-released: 2022-03-01
+url: "https://cloud-span.github.io/04genomics/"
+references:
+  - authors:
+    - family-names: "Becker"
+      given-names: "Erin Alison"
+    - family-names: "Reiter"
+      given-names: "Taylor"
+    - family-names: "Psomopoulos"
+      given-names: "Fotis"
+    - family-names: "Williams"
+      given-names: "Jason"
+    - family-names: "McKay"
+      given-names: "Sheldon John"
+    - family-names: "Mizzi"
+      given-names: "Jessica Elizabeth"
+    - family-names: "Kretzschmar"
+      given-names: "Winni"
+    date-released: "2019-06-01"
+    doi:10.5281/zenodo.3260609
+    repository-code: "https://github.com/datacarpentry/wrangling-genomics/"
+    title: "Data Carpentry: Genomics data wrangling and processing"
+    type: software
+    version: v2019.06.1
