@@ -18,7 +18,7 @@ authors:
 - family-names: "Rand"
   given-names: "Emma"
   orcid: "https://orcid.org/0000-0002-1358-8275"
-title: "Cloud-SPAN Genomics Course: Data Processing & Analysis"
+title: "Cloud-SPAN Genomics Course: Finding Sequence Variants"
 version: 0.1.0
 doi: 10.5281/zenodo.5584512
 date-released: 2022-03-01
