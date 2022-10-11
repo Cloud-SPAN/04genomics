@@ -91,3 +91,5 @@ exclude:
 highlighter: rouge
 
 remote_theme: Cloud-SPAN/cloud-span-theme
+
+google_analytics: G-W2S7FXQDYW
