@@ -54,7 +54,7 @@ $ gunzip data/ecoli_rel606.fasta.gz
 > ## Exercise
 >
 > We saved this file as `data/ecoli_rel606.fasta.gz` and then decompressed it.
-> What is the real name of the genome? Share your answer on the [forum](https://cloudspan.peerboard.com/post/1971354811).
+> What is the real name of the genome?
 >
 > Hint: the name of the genome is often recorded at the top of the file.
 >
@@ -381,7 +381,7 @@ to learn more about the VCF file format.
 
 > ## Exercise
 >
-> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. Share your answer on the [forum](https://cloudspan.peerboard.com/post/1386695982).
+> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file.
 >
 >> ## Solution
 >>
@@ -399,16 +399,15 @@ to learn more about the VCF file format.
 > {: .solution}
 {: .challenge}
 
-## Assess the alignment (visualization) - optional step
+## Assess the alignment (visualisation) - optional step
 
-It is often instructive to look at your data in a genome browser. Visualization will allow you to get a "feel" for
+It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for
 the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you
-ideas for further analyses.  As such, visualization tools are useful for exploratory analysis. In this lesson we
-will describe two different tools for visualization: a light-weight command-line based one and the Broad
-Institute's Integrative Genomics Viewer (IGV) which requires
+ideas for further analyses.  As such, visualisation tools are useful for exploratory analysis. In this lesson we
+will describe one particular tool for visualisation: the Broad Institute's Integrative Genomics Viewer (IGV) which requires
 software installation and transfer of files.
 
-In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
+In order for us to visualise the alignment files, we will need to index the BAM file using `samtools`:
 
 ~~~
 $ samtools index SRR2584866.aligned.sorted.bam
@@ -417,12 +416,12 @@ $ samtools index SRR2584866.aligned.sorted.bam
 
 ### Viewing with IGV
 
-[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
+[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
 Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for
 demonstration purposes, but in general you should avoid proliferating folders and files on your Desktop and
-instead organize files within a directory structure like we've been using in our `cloudspan` directory.
+instead organise files within a directory structure like we've been using in our `cloudspan` directory.
 
 ~~~
 $ mkdir ~/Desktop/cloudspan/files_for_igv
@@ -431,18 +430,20 @@ $ cd ~/Desktop/cloudspan/files_for_igv
 {: .bash}
 
 Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:`
-with your AWS instance number. The commands to `scp` always go in the terminal window that is connected to your
+with your AWS instance number. The command `scp` always goes in the terminal window that is connected to your
 local computer (not your AWS instance).
 
 ~~~
-$ scp csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866.aligned.sorted.bam* ~/Desktop/cloudspan/files_for_igv
-$ scp csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/data/ecoli_rel606.fasta ~/Desktop/cloudspan/files_for_igv
-$ scp csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866_final_variants.vcf ~/Desktop/cloudspan/files_for_igv
 
 ~~~
-{: .bash}
+{: .bash~}
 
-You will need to type the password for your AWS instance each time you call `scp`.
+~~~
+$ scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866.aligned.sorted.bam* ~/Desktop/cloudspan/files_for_igv
+$ scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/data/ecoli_rel606.fasta ~/Desktop/cloudspan/files_for_igv
+$ scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866_final_variants.vcf ~/Desktop/cloudspan/files_for_igv
+~~~
+{: .bash}
 
 Next, we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
 to unzip it, and then drag the program into your Applications folder.
