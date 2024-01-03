@@ -376,7 +376,7 @@ For our file, the metrics presented are GT:PL:GQ.
 | GQ | the Phred-scaled confidence for the genotype |
 | AD, DP | the depth per allele by sample and coverage |
 
-The Broad Institute's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=1268) is an excellent place
+The Broad Institute's [VCF guide](https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format) is an excellent place
 to learn more about the VCF file format.
 
 > ## Exercise
