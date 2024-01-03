@@ -418,25 +418,17 @@ $ samtools index SRR2584866.aligned.sorted.bam
 
 [IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
-In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
-Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for
-demonstration purposes, but in general you should avoid proliferating folders and files on your Desktop and
-instead organise files within a directory structure like we've been using in our `cloudspan` directory.
+In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`. The command `scp` always goes in the terminal window that is connected to your local computer (not your AWS instance).
+
+Open a new tab in your terminal window and make sure you are in your existing `cloudspan` directory. Then, create a new folder called `files_for_igv`.
 
 ~~~
-$ mkdir ~/Desktop/cloudspan/files_for_igv
-$ cd ~/Desktop/cloudspan/files_for_igv
+$ pwd
+$ mkdir files_for_igv
 ~~~
 {: .bash}
 
-Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:`
-with your AWS instance number. The command `scp` always goes in the terminal window that is connected to your
-local computer (not your AWS instance).
-
-~~~
-
-~~~
-{: .bash~}
+Now we will transfer our files to that new directory. Remember to replace `NNN` with your AWS instance number. 
 
 ~~~
 $ scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:/home/csuser/cs_course/results/SRR2584866.aligned.sorted.bam* ~/Desktop/cloudspan/files_for_igv
