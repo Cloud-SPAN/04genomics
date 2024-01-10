@@ -136,8 +136,7 @@ parameters here, your use case might require a change of parameters. *NOTE: Alwa
 and make sure the options you use are appropriate for your data.*
 
 We're going to start by aligning the reads from just one of the
-samples in our dataset (`SRR2584866`). Later, we'll be
-iterating this whole process on all of our sample files.
+samples in our dataset (`SRR2584866`).
 
 ~~~
 $ bwa mem data/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/SRR2584866.aligned.sam
@@ -206,14 +205,26 @@ Our files are pretty small, so we won't see this output. If you run the workflow
 
 SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
 
-You can use samtools to learn more about this bam file as well.
+### Index the sorted BAM file
+We will now index our sorted BAM file. This will generate a **bam.bai** file which we will need later on.
+
+When we indexed the reference genome we used `bwa` because we were working with a FASTA file. This time we are working with a BAM file so we'll use `samtools` instead, but the general principle is the same.
+
+~~~
+samtools index SRR2584866.aligned.sorted.bam
+~~~
+{: .bash}
+
+### BAM statistics
+
+You can use samtools to learn more about the sorted BAM file as well.
 
 ~~~
 samtools flagstat SRR2584866.aligned.sorted.bam
 ~~~
 {: .bash}
 
-This will give you the following statistics about your sorted bam file:
+This will give you the following statistics about your file:
 
 ~~~
 351169 + 0 in total (QC-passed reads + QC-failed reads)
@@ -231,6 +242,7 @@ This will give you the following statistics about your sorted bam file:
 0 + 0 with mate mapped to a different chr (mapQ>=5)
 ~~~
 {: .output}
+
 ## Variant calling
 
 A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome
@@ -458,12 +470,6 @@ heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are
 Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information
 corresponds to alignment information at those loci.
 Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
-
-Now that we've run through our workflow for a single sample, we may want to repeat this workflow for our other five
-samples. However, we don't want to type each of these individual steps again five more times. That would be very
-time consuming and error-prone, and would become impossible as we gathered more and more samples. Luckily, we
-already know the tools we need to use to automate this workflow and run it on as many files as we want using a
-single line of code. Those tools are: wildcards, for loops, and bash scripts. We'll use all three in a future workshop on automation.
 
 > ## Installing Software
 >
