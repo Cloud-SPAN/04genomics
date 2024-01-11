@@ -419,7 +419,9 @@ ideas for further analyses.  As such, visualisation tools are useful for explora
 will describe one particular tool for visualisation: the Broad Institute's Integrative Genomics Viewer (IGV) which requires
 software installation and transfer of files.
 
-In order for us to visualise the alignment files, we will need to index the BAM file using `samtools`:
+In order for us to visualise the alignment files, we will need to index the BAM file and generate a **bam.bai** file.
+
+When we indexed the reference genome we used `bwa` because we were working with a FASTA file. This time we are working with a BAM file so we'll use `samtools` instead, but the general principle is the same.
 
 ~~~
 $ samtools index SRR2584866.aligned.sorted.bam
