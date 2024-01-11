@@ -118,6 +118,7 @@ While the index is created, you will see output that looks something like this:
 ~~~
 {: .output}
 
+
 ### Align reads to reference genome
 
 The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
@@ -159,6 +160,12 @@ You will see output that starts like this:
 ~~~
 {: .output}
 
+> ## BWA Alignment options
+> BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence
+> reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such
+> as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it
+> is faster and more accurate.
+{: .callout}
 
 #### SAM/BAM format
 The [SAM file](https://genome.sph.umich.edu/wiki/SAM),
@@ -517,11 +524,4 @@ Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData
 > analyses on your own computer. You'll need to install
 > the software first. Look at the [setup instructions](https://software.broadinstitute.org/software/igv/download) for more information
 > on installing these software packages.
-{: .callout}
-
-> ## BWA Alignment options
-> BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence
-> reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such
-> as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it
-> is faster and more accurate.
 {: .callout}
