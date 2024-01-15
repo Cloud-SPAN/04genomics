@@ -292,13 +292,32 @@ $ bcftools call --ploidy 1 -m -v -o SRR2584866_variants.vcf SRR2584866_raw.bcf
 
 ### Step 3: Filter and report the SNP variants in variant calling format (VCF)
 
-Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
+Now we will filter the SNPs to exclude those which are not robustly supported changes. For this we will use a script called `vcfutils.pl`, which has a function called `varFilter`. Our output will be in VCF format.
 
+This is not the only way to filter SNPs. However, it is useful because it already has a set of default filters which makes our lives a bit easier! Some of the filters it implements include:
+- minimum root mean square (RMS) of mapping quality i.e. the minimum acceptable probability that a read is incorrectly aligned (default = 10)
+- minimum read depth i.e. the minimum number of reads covering that locus (default = 2)
+- maximum read depth (default = 10000000)
+- minimum number of alternate reads supporting the SNP (default = 2)
+- minimum distance from a gap (a region not covered by any mapped reads) (default = 3)
+
+To run the script with default parameters:
 ~~~
 $ vcfutils.pl varFilter SRR2584866_variants.vcf  > SRR2584866_final_variants.vcf
 ~~~
 {: .bash}
 
+> Today we will use the default filters but it may be useful to try applying different parameters in your own time to see what difference they make to the final SNP report. 
+> You can find a list of the filters used on line 223 of [this script](https://github.com/lh3/samtools/blob/master/bcftools/vcfutils.pl)
+>
+> To change the value of a parameter from the default, add it to the command using the appropriate flag. For example:
+> ~~~
+> $ vcfutils.pl varFilter -d 5 SRR2584866_variants.vcf  > SRR2584866_final_variants.vcf
+> ~~~
+> {: .bash}
+> 
+> sets the minimum read depth (**-d**) to **5**.
+{: .callout}
 
 ## Explore the VCF format:
 
