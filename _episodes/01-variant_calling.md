@@ -183,10 +183,11 @@ displayed below with the different fields highlighted.
 
 ![sam_bam1](../img/sam_bam.png)
 
-
 ![sam_bam2](../img/sam_bam3.png)
 
-We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`). We will be doing the next few commands in the results folder, so we will change into that directory first:
+We will convert the SAM file to BAM format using the `samtools` program with the `view` command. There are a couple of options/flags we need to include:
+- `-S` tells samtools that the input is in SAM format
+- `-b` tells samtools that the output should be in BAM format
 
 ~~~
 $ cd results
@@ -196,7 +197,8 @@ $ samtools view -S -b SRR2584866.aligned.sam > SRR2584866.aligned.bam
 
 ### Sort BAM file by coordinates
 
-Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
+Next we sort the BAM file using the `sort` command from `samtools`. The default setting for this command is to sort the alignments by coordinates i.e. where they lie on the chromosome.
+- `-o ` tells the command to write the sorted output to a file called `SRR2584866.aligned.sorted.bam`
 
 ~~~
 $ samtools sort -o SRR2584866.aligned.sorted.bam SRR2584866.aligned.bam
@@ -262,10 +264,12 @@ variants.
 
 ### Step 1: Calculate the read coverage of positions in the genome
 
-Do the first pass on variant calling by counting read coverage with
-[bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
-use the command `mpileup`. The flag `-O b` tells bcftools to generate a
-bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
+Do the first pass on variant calling by counting read coverage with [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
+use the command `mpileup`, which is one method of summarising the coverage of mapped reads at single base pair resolution. There are other tools which do the same job, such as [GATK](https://gatk.broadinstitute.org/hc/en-us) and [freebayes](https://github.com/freebayes/freebayes).
+
+- `-O b` bcftools to generate the output file in BCF format
+- `o` indicates that the output should be called `SRR2584866_raw.bcf`
+- `f` tells bcftools to find the reference genome at the path `../data/ecoli_rel606.fasta SRR2584866.aligned.sorted.bam`
 
 ~~~
 $ bcftools mpileup -O b -o SRR2584866_raw.bcf \
@@ -283,7 +287,11 @@ We have now generated a file with coverage information for every base.
 
 ### Step 2: Detect the single nucleotide polymorphisms (SNPs)
 
-Identify SNPs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
+Now we can look through our aligned reads and identify SNPs using bcftools `call`. Once again there are some parameters we need to specify:
+- `--ploidy` indicates the ploidy of the genome being analysed - in our case, *E. coli* is haploidy so this is `1`
+- `-m` tells bcftools that multiallelic and rare-variant calls are allowed (this allows more than one variant allele at any given position)
+- `-v` tells bcftools to output variant sites only
+- `-o` tells bcftools to write the output to a file called `SRR2584866_variants.vcf`
 
 ~~~
 $ bcftools call --ploidy 1 -m -v -o SRR2584866_variants.vcf SRR2584866_raw.bcf
@@ -396,7 +404,7 @@ The first few columns represent the information we have about a predicted variat
 | FILTER | a `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed |
 
 In an ideal world, the information in the `QUAL` column would be all we needed to filter out bad variant calls.
-However, in reality we need to filter on multiple other metrics.
+However, in reality we need to filter on multiple other metrics. That's why we used the `vcfutils.pl varFilter` script to do some filtering before we looked at this output.
 
 The last two columns contain the genotypes and can be tricky to decode.
 
