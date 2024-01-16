@@ -315,6 +315,7 @@ $ vcfutils.pl varFilter SRR2584866_variants.vcf  > SRR2584866_final_variants.vcf
 ~~~
 {: .bash}
 
+> ## Useful info
 > Today we will use the default filters but it may be useful to try applying different parameters in your own time to see what difference they make to the final SNP report. 
 > You can find a list of the filters used on line 223 of [this script](https://github.com/lh3/samtools/blob/master/bcftools/vcfutils.pl)
 >
@@ -564,15 +565,22 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 - SRR2584863 was sampled from generation 15,000
 - SRR2584866 was sampled from generation 50,000
 
+> ## Challenge 1
+>
 > Look back at the [background information](https://cloud-span.github.io/02genomics/03-background/index.html) and the [metadata](https://github.com/Cloud-SPAN/04genomics/blob/gh-pages/files/Ecoli_metadata_composite.csv) for this dataset.
 >
 > What differences do you predict you would see between the SNP call outputs for the three samples? Think about the number of mutations present and how this might differ.
+>
+> > ## Solution
+> >
 > > We might predict that the number of mutations will increase as the generations go on, with SRR2584866 having most and SRR2589044 having least.
 > >
 > > Additionally, looking at the metadata table tells us that SRR2584866 (generation 50,000) is known to be both hypermutable and able to metabolise citrate (Cit+). This sample is therefore likely to have a lot more mutations than its predecessors, which are not hypermutable.
 > {: .solution}
 {: .challenge}
 
+> ## Challenge 2
+>
 > Test your hypothesis! Go back through the variant calling workflow with the other two samples. You can start from ["Align reads to reference genome"](https://cloud-span.github.io/04genomics/01-variant_calling/index.html#:~:text=Align%20reads%20to%20reference%20genome) as the reference genome doesn't need indexing again.
 >
 > You may want to create some folders to organise the results for each individual sample.
