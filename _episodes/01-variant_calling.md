@@ -445,7 +445,7 @@ to learn more about the VCF file format.
 > {: .solution}
 {: .challenge}
 
-# Assess the alignment (visualisation) - optional step
+# Assess the alignment (visualisation)
 
 It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for
 the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you
@@ -552,3 +552,30 @@ Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData
 > the software first. Look at the [setup instructions](https://software.broadinstitute.org/software/igv/download) for more information
 > on installing these software packages.
 {: .callout}
+
+## What next?
+We've now come to the end of our variant calling workflow. We have a list of all the presumed SNPs in our sample, and we've visualised where they are in the genome. If this were a real analysis, however, our work would not yet be done.
+
+### Analyse and compare other samples
+First of all, we have more samples to analyse! For this example workflow we chose to look at sample SRR2584866. However, we downloaded two other samples - SRR2584863 and SRR2589044 - at the start of this session. 
+
+Each sample represents a different timepoint in the *E. coli* long-term evolution experiment we discussed previously:
+- SRR2589044 was sampled from generation 5000
+- SRR2584863 was sampled from generation 15,000
+- SRR2584866 was sampled from generation 50,000
+
+> Look back at the [background information](https://cloud-span.github.io/02genomics/03-background/index.html) and the [metadata](https://github.com/Cloud-SPAN/04genomics/blob/gh-pages/files/Ecoli_metadata_composite.csv) for this dataset.
+>
+> What differences do you predict you would see between the SNP call outputs for the three samples? Think about the number of mutations present and how this might differ.
+> > We might predict that the number of mutations will increase as the generations go on, with SRR2584866 having most and SRR2589044 having least.
+> >
+> > Additionally, looking at the metadata table tells us that SRR2584866 (generation 50,000) is known to be both hypermutable and able to metabolise citrate (Cit+). This sample is therefore likely to have a lot more mutations than its predecessors, which are not hypermutable.
+> {: .solution}
+{: .challenge}
+
+> Test your hypothesis! Go back through the variant calling workflow with the other two samples. You can start from ["Align reads to reference genome"](https://cloud-span.github.io/04genomics/01-variant_calling/index.html#:~:text=Align%20reads%20to%20reference%20genome) as the reference genome doesn't need indexing again.
+>
+> You may want to create some folders to organise the results for each individual sample.
+>
+> Once you have generated your VCF files you can view these in the IGV web app alongside your existing file. Add each VCF file as a new track. You might also want to upload the aligned reads (and their index) on separate tracks too. Once you have everything uploaded, use the viewer to examine the differences between the three samples. Was your prediction correct?
+{: .challenge}
