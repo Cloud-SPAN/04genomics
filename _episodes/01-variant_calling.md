@@ -506,7 +506,7 @@ We will start by loading our reference genome. Select **Genome > Local File** an
 
 It will look like nothing has happened except for the default data disappearing. Don't worry! The genome is just too zoomed out to represent visually. Zoom in and out using the controls at the top right of the page - if you zoom in far enough you will start to see coloured lines representing the different bases making up the genome.
 
-![IGV web app with reference genome loaded](../img/igv_web_2_small.png)
+![IGV web app with reference genome loaded](../img/igv_web_2.png)
 
 ### Loading the reads 
 Next we load the aligned reads, which go on their own 'track'.
