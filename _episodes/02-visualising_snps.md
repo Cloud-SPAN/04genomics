@@ -154,3 +154,19 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 > Once you have generated your VCF files you can view these in the IGV web app alongside your existing file. Add each VCF file as a new track. You might also want to upload the aligned reads (and their index) on separate tracks too. Once you have everything uploaded, use the viewer to examine the differences between the three samples. Was your prediction correct?
 {: .challenge}
 
+### Annotate your VCF file
+The VCF file we have generated tells us **where** SNPs are located, but not a lot about **what** they affect. Are they affecting coding or non-coding DNA? Do they affect protein coding? How strong are these effects?
+
+You can answer (some of) these questions using annotation software, such as [SNPEff](https://pcingola.github.io/SnpEff/snpeff/introduction/), [ANNOVAR](https://annovar.openbioinformatics.org/en/latest/) or [Ensembl's Variant Effect Predictor (VEP)](https://annovar.openbioinformatics.org/en/latest/).
+These programs work by comparing the variants in the VCF file with a fully annotated copy of the relevant genome (often available publicly online), which contains information about where genes and regulatory regions are located, what they do, what the proteins they code for look like and so on. Variants can be classified according to what kind of effect they have and how strong this effect is.
+
+ Some programs, like SNPEff, even output an HTML report summarising the findings:
+ ![A SNPEff output report containing summary information about the variants](../img/snp_eff_report.png)
+
+ In this report (which is for a different organism, but is still useful as an example) we can see that effects have been classified by:
+ - type (whether they are a SNP, a MNP, insertion, deletion etc)
+ - impact (how strong an effect they are likely to have on the resulting protein e.g. a variant which introduces a premature stop codon is likely to cause loss of function and therefore has a high impact)
+ - functional class (whether SNPs introduce a change in amino acid sequence or not)
+ - type and region (more detailed information about where variants are occurring e.g. upstream of a gene, in a gene-coding region, downstream etc)
+
+ These annotation software programs are very useful tools to get more information out of your VCF file.
