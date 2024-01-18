@@ -8,8 +8,10 @@ questions:
 objectives:
 - "Know how to load a VCF file in the IGV Web app."
 - "Understand how quality information corresponds to alignment information."
+- "Get a feel for what analysis could be done next."
 keypoints:
-- "It is useful to visualise alignments and compare potential variants."
+- "It is useful to visualise alignments and compare potential SNPs."
+- "There are several paths which could be taken to continue analysing the SNPs identified in a variant calling workflow"
 ---
 
 # Assess the alignment (visualisation)
@@ -170,3 +172,17 @@ These programs work by comparing the variants in the VCF file with a fully annot
  - type and region (more detailed information about where variants are occurring e.g. upstream of a gene, in a gene-coding region, downstream etc)
 
  These annotation software programs are very useful tools to get more information out of your VCF file.
+
+ ### Focus on a specific gene or region
+ You might be interested in just a specific gene or region. You can filter your VCF file to just show SNPs which fall within a particular region, then look more closely at these SNPs.
+
+ ### Population structure analysis
+By comparing the VCF outputs from multiple samples you can identify population structure (i.e. how the various samples are related). This is useful if you are interested in the evolutionary history of your species of interest.
+
+A good tool for this is [Plink](https://www.cog-genomics.org/plink/). Using Plink you can do principal components analysis (PCA), a way to visualise differences between samples in a two-dimensional plot. A PCA plot can reveal clusters of samples that are more genetically similar to each other than to others. This in turn tells you which samples are closely related and which have diverged from one another over time.
+
+ ### Population genomic diversity
+The diversity of samples can be expressed in a few different ways, all of which can be calculated using [vcftools](https://vcftools.sourceforge.net/man_latest.html). Here are a few:
+- nucleotide diversity (π) is a simple measure of genetic diversity which can give an idea of how SNPs are spread out across the genome - are they more concentrated in particular regions? Are there regions with very low diversity (indicating a possible conserved region)?
+- Tajima's D can determine whether a region of DNA is under selective pressure by comparing how the frequency of "neutral" SNPs fluctuates
+- the fixation index (fst) is a measure of population separation (or genetic distance) between two populations - this can either apply to the genomes overall or can be compared across regions of the genome
