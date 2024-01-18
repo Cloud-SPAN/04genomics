@@ -157,6 +157,7 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 {: .challenge}
 
 ### Annotate your VCF file
+
 The VCF file we have generated tells us **where** SNPs are located, but not a lot about **what** they affect. Are they affecting coding or non-coding DNA? Do they affect protein coding? How strong are these effects?
 
 You can answer (some of) these questions using annotation software, such as [SNPEff](https://pcingola.github.io/SnpEff/snpeff/introduction/), [ANNOVAR](https://annovar.openbioinformatics.org/en/latest/) or [Ensembl's Variant Effect Predictor (VEP)](https://annovar.openbioinformatics.org/en/latest/).
@@ -174,14 +175,17 @@ These programs work by comparing the variants in the VCF file with a fully annot
  These annotation software programs are very useful tools to get more information out of your VCF file.
 
  ### Focus on a specific gene or region
+
  You might be interested in just a specific gene or region. You can filter your VCF file to just show SNPs which fall within a particular region, then look more closely at these SNPs.
 
  ### Population structure analysis
+
 By comparing the VCF outputs from multiple samples you can identify population structure (i.e. how the various samples are related). This is useful if you are interested in the evolutionary history of your species of interest.
 
 A good tool for this is [Plink](https://www.cog-genomics.org/plink/). Using Plink you can do principal components analysis (PCA), a way to visualise differences between samples in a two-dimensional plot. A PCA plot can reveal clusters of samples that are more genetically similar to each other than to others. This in turn tells you which samples are closely related and which have diverged from one another over time.
 
  ### Population genomic diversity
+ 
 The diversity of samples can be expressed in a few different ways, all of which can be calculated using [vcftools](https://vcftools.sourceforge.net/man_latest.html). Here are a few:
 - nucleotide diversity (π) is a simple measure of genetic diversity which can give an idea of how SNPs are spread out across the genome - are they more concentrated in particular regions? Are there regions with very low diversity (indicating a possible conserved region)?
 - Tajima's D can determine whether a region of DNA is under selective pressure by comparing how the frequency of "neutral" SNPs fluctuates
