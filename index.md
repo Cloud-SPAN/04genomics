@@ -12,6 +12,8 @@ use a variety of bioinformatic tools with confidence and greatly enhance your re
 
 We will also be learning about the power of automation when repeating similar workflows multiple times, and apply this to our analysis.
 
+![variant calling](../img/variant_calling.png)
+
 > ## Prerequisites
 >
 > This lesson assumes a working understanding of the bash shell. If you haven't already completed [Prenomics](https://cloud-span.github.io/prenomics00-intro/), and aren't familiar with the bash shell, please review those materials
