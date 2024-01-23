@@ -124,10 +124,6 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 - SRR2584863 was sampled from generation 15,000
 - SRR2584866 was sampled from generation 50,000
 
-# test
-## test
-### test
-
 > ## Challenge 1
 >
 > Look back at the [background information](https://cloud-span.github.io/02genomics/03-background/index.html) and the [metadata](https://github.com/Cloud-SPAN/04genomics/blob/gh-pages/files/Ecoli_metadata_composite.csv) for this dataset.
@@ -151,10 +147,6 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 > Once you have generated your VCF files you can view these in the IGV web app alongside your existing file. Add each VCF file as a new track. You might also want to upload the aligned reads (and their index) on separate tracks too. Once you have everything uploaded, use the viewer to examine the differences between the three samples. Was your prediction correct?
 {: .challenge}
 
-# test
-## test
-### test
-
 ### Annotate your VCF file
 
 The VCF file we have generated tells us **where** SNPs are located, but not a lot about **what** they affect. Are they affecting coding or non-coding DNA? Do they affect protein coding? How strong are these effects?
@@ -172,6 +164,10 @@ These programs work by comparing the variants in the VCF file with a fully annot
  - type and region (more detailed information about where variants are occurring e.g. upstream of a gene, in a gene-coding region, downstream etc)
 
  These annotation software programs are very useful tools to get more information out of your VCF file.
+
+# test
+## test
+### test
 
  ### Focus on a specific gene or region
 
