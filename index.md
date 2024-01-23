@@ -3,16 +3,13 @@ layout: lesson
 root: .
 ---
 
-[Last lesson](https://cloud-span.github.io/03genomics/) you performed quality control on your reads. This lesson we will align those reads to a reference genome, and end by identifying and visualizing variations among these
-samples. 
+[Last lesson](https://cloud-span.github.io/03genomics/) you performed quality control on your reads. This lesson we will align those reads to a reference genome, and end by identifying and visualizing variations among these samples. 
 
-As you progress through this lesson, keep in mind that, even if you aren't going to be doing this same workflow in your research, 
-you will be learning some very important lessons about using command-line bioinformatic tools. What you learn here will enable you to 
-use a variety of bioinformatic tools with confidence and greatly enhance your research efficiency and productivity.
+As you progress through this lesson, keep in mind that, even if you aren't going to be doing this same workflow in your research, you will be learning some very important lessons about using command-line bioinformatic tools. 
+What you learn here will enable you to use a variety of bioinformatic tools with confidence and greatly enhance your research efficiency and productivity.
 
-We will also be learning about the power of automation when repeating similar workflows multiple times, and apply this to our analysis.
 
-![variant calling](../img/variant_calling.png)
+![variant calling](img\variant_calling.png)
 
 > ## Prerequisites
 >
