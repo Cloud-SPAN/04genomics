@@ -124,6 +124,10 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 - SRR2584863 was sampled from generation 15,000
 - SRR2584866 was sampled from generation 50,000
 
+# test
+## test
+### test
+
 > ## Challenge 1
 >
 > Look back at the [background information](https://cloud-span.github.io/02genomics/03-background/index.html) and the [metadata](https://github.com/Cloud-SPAN/04genomics/blob/gh-pages/files/Ecoli_metadata_composite.csv) for this dataset.
@@ -146,6 +150,10 @@ Each sample represents a different timepoint in the *E. coli* long-term evolutio
 >
 > Once you have generated your VCF files you can view these in the IGV web app alongside your existing file. Add each VCF file as a new track. You might also want to upload the aligned reads (and their index) on separate tracks too. Once you have everything uploaded, use the viewer to examine the differences between the three samples. Was your prediction correct?
 {: .challenge}
+
+# test
+## test
+### test
 
 ### Annotate your VCF file
 
